@@ -11,9 +11,9 @@ public class Actions {
 
 		DriverManager.open();
 		
-		PageObjects.login_field().sendKeys("eva.mask");
+		PageObjects.login_field().sendKeys("***");
 		PageObjects.domain_field().sendKeys("@mail.ru");
-		PageObjects.password_field().sendKeys("karavan1");
+		PageObjects.password_field().sendKeys("***");
 		if (PageObjects.remember_checkbox().isSelected()) {
 			PageObjects.remember_checkbox().click();
 		}
