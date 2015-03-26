@@ -74,10 +74,17 @@ public class Actions {
 		}
 	
 	static boolean true_if_inbox_empty() {
-		if (PageObjects.inbox_empty().isDisplayed()) 
+		if (PageObjects.inbox_empty().isEnabled()) 
 			return true;
 		else
 			return false;
+	}
+	
+	static boolean true_if_inbox_zero() {
+		if (PageObjects.inbox_numbers().isDisplayed()) 
+			return false;
+		else
+			return true;
 	}
 	
 	static void goInbox() {

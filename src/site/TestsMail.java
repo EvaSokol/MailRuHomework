@@ -51,23 +51,21 @@ public class TestsMail {
 			
 		Actions.login();
 
-		if (Actions.true_if_inbox_empty()) {
+		if (Actions.true_if_inbox_zero()) {
 			Actions.sendMail();
 			Actions.goInbox();
 		}
-		
+		System.out.println("1");
 		int letters_before = Actions.get_inbox_letters();
-		
+		System.out.println("2");
 		PageObjects.last_letter().click();
-		
+		System.out.println("3");
 		PageObjects.delete_button().click();
-		
-		int letters_after;
-		if (Actions.true_if_inbox_empty()) 
-			letters_after = 0;
-		else
+		System.out.println("4");
+		int letters_after = 0;
+		if (! (Actions.true_if_inbox_empty())) 
 			letters_after = Actions.get_inbox_letters();
-		
+		System.out.println("5");
 		assert(letters_before - 1 == letters_after);
 	}
 	
