@@ -1,5 +1,7 @@
 package site;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,6 +47,10 @@ public class PageObjects {
 		return Driver.findElement(By.xpath(".//span[@class='b-toolbar__btn__text b-toolbar__btn__text_pad']"));
 		}
 	
+	static List<WebElement> inbox_numbers_list() {
+		return Driver.findElements(By.xpath(".//span[@class='b-nav__item__count']"));
+		}
+	
 	static WebElement inbox_numbers() {
 		return Driver.findElement(By.xpath(".//span[@class='b-nav__item__count']"));
 		}
@@ -54,13 +60,15 @@ public class PageObjects {
 		}
 	
 	static WebElement delete_button() {
-		return Driver.findElement(By.xpath(".//i[@class='ico ico_toolbar ico_toolbar_remove']"));
+		return Driver.findElement(By.xpath(".//div[@data-name='remove']"));
 		}
 	
-	static WebElement inbox_empty() {
-		return Driver.findElement(By.xpath(".//span[@class='b-datalist__empty__text']"));
+	static WebElement delete_button2() {
+		return Driver.findElement(By.xpath(".//div[@data-shortcut-title='del']"));
 		}
 	
+//	data-shortcut-title="Del"
+
 	static WebElement sent_folder() {
 		return Driver.findElement(By.xpath(".//i[@class='ico ico_folder ico ico_folder_send']"));
 		}
@@ -104,6 +112,16 @@ public class PageObjects {
 		}
 // __________________ LETTER is SENT __________________	
 
+// ****************** SENT PAGE ******************
+	static WebElement check_all_letters() {
+		return Driver.findElement(By.xpath(".//div[@class='cbx__checkmark']"));
+		}
+	
+	static WebElement check_all_page() {
+		return Driver.findElement(By.xpath(".//div[@class='b-layout']"));
+		}
+// __________________ SENT PAGE __________________
+	
 // ****************** NEW PAGE ******************
 // __________________ NEW PAGE __________________
 	

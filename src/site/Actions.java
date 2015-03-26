@@ -64,28 +64,23 @@ public class Actions {
 		}
 	
 	static void wait_by_exit() {
-		WebDriverWait _wait = new WebDriverWait(Driver, 3);
+		WebDriverWait _wait = new WebDriverWait(Driver, 5);
 		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.exit())); 
 		}
 	
-	static int get_inbox_letters() {
-		WebElement inbox = PageObjects.inbox_numbers();
-		return Integer.parseInt(inbox.getText());
+	static void wait_by_delete() {
+		WebDriverWait _wait = new WebDriverWait(Driver, 3);
+		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.delete_button())); 
 		}
 	
-	static boolean true_if_inbox_empty() {
-		if (PageObjects.inbox_empty().isEnabled()) 
-			return true;
-		else
-			return false;
-	}
-	
-	static boolean true_if_inbox_zero() {
-		if (PageObjects.inbox_numbers().isDisplayed()) 
-			return false;
-		else
-			return true;
-	}
+	static int get_inbox_letters() {
+		if (PageObjects.inbox_numbers_list().size() == 0)
+			return 0;
+		else {
+			WebElement inbox = PageObjects.inbox_numbers();
+			return Integer.parseInt(inbox.getText());
+			}
+		}
 	
 	static void goInbox() {
 		PageObjects.inbox().click();

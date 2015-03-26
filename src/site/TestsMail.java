@@ -5,7 +5,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.AfterClass;
-import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.Keys;
 
 public class TestsMail {
 
@@ -51,32 +51,37 @@ public class TestsMail {
 			
 		Actions.login();
 
-		if (Actions.true_if_inbox_zero()) {
+		if (Actions.get_inbox_letters() == 0) {
 			Actions.sendMail();
 			Actions.goInbox();
 		}
-		System.out.println("1");
+
 		int letters_before = Actions.get_inbox_letters();
-		System.out.println("2");
+
 		PageObjects.last_letter().click();
-		System.out.println("3");
+
 		PageObjects.delete_button().click();
-		System.out.println("4");
-		int letters_after = 0;
-		if (! (Actions.true_if_inbox_empty())) 
-			letters_after = Actions.get_inbox_letters();
-		System.out.println("5");
+
+		int letters_after = Actions.get_inbox_letters();
+
 		assert(letters_before - 1 == letters_after);
 	}
 	
-//	@Test
-//	public void cleanSentFolder() {
-//		
-//		Actions.login();
-//		
-//		Action action = new Action(DriverManager.getDriver());
-//		PageObjects.sent_folder().sendKeys(Ri);
-//	}
+	@Test
+	public void cleanSentFolder() {
+		
+		Actions.login();
+		System.out.println("1");
+		PageObjects.sent_folder().click();
+		System.out.println("2");
+		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		
+		System.out.println("3");
+		PageObjects.check_all_page().sendKeys(Keys.DELETE);
+//		PageObjects.delete_button().click();
+		System.out.println("4");
+		assert(Actions.get_inbox_letters() == 0);
+	}
 	
 	@After
 	public void Logout() {
