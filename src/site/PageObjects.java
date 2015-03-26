@@ -66,8 +66,6 @@ public class PageObjects {
 	static WebElement delete_button2() {
 		return Driver.findElement(By.xpath(".//div[@data-shortcut-title='del']"));
 		}
-	
-//	data-shortcut-title="Del"
 
 	static WebElement sent_folder() {
 		return Driver.findElement(By.xpath(".//i[@class='ico ico_folder ico ico_folder_send']"));
@@ -119,6 +117,14 @@ public class PageObjects {
 	
 	static WebElement check_all_page() {
 		return Driver.findElement(By.xpath(".//div[@class='b-layout']"));
+		}
+	
+	static List<WebElement> sent_numbers_list() {
+		return Driver.findElements(By.xpath(".//span[@class='b-nav__item__count']"));
+		}
+	
+	static WebElement sent_numbers() {
+		return Driver.findElement(By.xpath(".//span[@class='b-nav__item__count']"));
 		}
 // __________________ SENT PAGE __________________
 	
