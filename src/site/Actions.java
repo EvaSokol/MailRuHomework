@@ -68,8 +68,10 @@ public class Actions {
 		}
 	
 	static int get_inbox_letters() {
-		if (PageObjects.inbox_numbers_list().size() == 0)
+		if (PageObjects.inbox_numbers_list().size() == 0) {
 			return 0;
+		}
+			
 		else {
 			WebElement inbox = PageObjects.inbox_numbers();
 			return Integer.parseInt(inbox.getText());
@@ -90,7 +92,7 @@ public class Actions {
 		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		}
 	
-	static void deleteAll() {
+	static void delete_All() {
 		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		PageObjects.check_all_page().sendKeys(Keys.DELETE);
 		}
@@ -104,7 +106,7 @@ public class Actions {
 		PageObjects.last_letter_checkbox().click();
 		PageObjects.delete_button().click();
 		}
-	
+		
 	static boolean true_if_trash_empty() {
 		if (PageObjects.trash_empty().size() == 0)
 			return false;
@@ -114,8 +116,22 @@ public class Actions {
 	
 	static void cleanTrash() {
 		PageObjects.clean_trash_folder_button().click();
-//		PageObjects.clean_trash_confirmation_button().submit();
-//		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.clean_trash_confirmation_button())); 
 		PageObjects.clean_trash_confirmation().click();
+	}
+
+	static void go_Sent_folder() {
+		PageObjects.sent_folder().click();
+		
+	}
+
+	public static int get_sent_letters() {
+		if (PageObjects.sent_numbers_list().size() == 0) {
+			return 0;
+		}
+			
+		else {
+			WebElement inbox = PageObjects.sent_numbers();
+			return Integer.parseInt(inbox.getText());
+			}
 	}
 }

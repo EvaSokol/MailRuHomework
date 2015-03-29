@@ -1,18 +1,27 @@
 (Tests_of_tests_mail_TW)
 
-test_LoginLogout				+
-test_SendMail				+
-test_DeleteLastLetter (letter is present)		+
-test_DeleteLastLetter (letter is absent)		-
-test_CleanSentFolder (letters are present) 	-
-test_CleanSentFolder (letters are absent) 	-
-test_CleanTrashFolder (letters are present) 	+
-test_CleanTrashFolder (letters are absent) 	-
+Executes as follows:
+1 CleanTrashFolder
+2 LoginLogout
+3 SendMail
+4 CleanSentFolder
+5 DeleteLastLetter
 
-TestMail
-Run as following:
-1. test_CleanTrashFolder (passed)
-2. test_LoginLogout (passed)
-3. test_SendMail (passed)
-4. test_CleanSentFolder (passed)
-5. test_DeleteLastLetter (failed)
+trash  	sent  	inbox   	LoginLogout	SendMail	DeleteLastLetter	CleanSentFolder	CleanTrashFolder
+0	0	0           	1		1	1		1		1
+0	0	1	1		1	1		1		1
+0	1	0	1		1	1		1		0/1
+0	1	1	1		1	0/1		1		0
+1	0	0	1		1	1		1		1
+1	0	1	1		1	1		1		1
+1	1	0	1		1	1		1		1
+1	1	1	1		1	0		1		1
+
+For trash, sent and inbox
+0 = no letters in folder
+1 = some letters in folder
+
+For tests
+0 = failed
+1 = passed
+0/1 = failed in 50% of tests

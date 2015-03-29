@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.AfterClass;
-import org.openqa.selenium.Keys;
 
 public class TestsMail {
 
@@ -74,18 +73,19 @@ public class TestsMail {
 		
 		Actions.login();
 
-		PageObjects.sent_folder().click();
+		Actions.go_Sent_folder();
+		Actions.markAllUnread();
 		
-		if (Actions.get_inbox_letters() == 0) {
+		if (Actions.get_sent_letters() == 0) {
 			Actions.sendMail();
-			Actions.goInbox();
+			Actions.go_Sent_folder();
 		}
 		
 		Actions.markAllUnread();
 		
-		Actions.delete_last_letter();
-
-		assert(Actions.get_inbox_letters() == 0);
+		Actions.delete_All();
+		
+		assert(Actions.get_sent_letters() == 0);
 	}
 	
 	@Test

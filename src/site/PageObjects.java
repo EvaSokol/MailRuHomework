@@ -48,11 +48,11 @@ public class PageObjects {
 		}
 	
 	static List<WebElement> inbox_numbers_list() {
-		return Driver.findElements(By.xpath(".//span[@class='b-nav__item__count']"));
+		return Driver.findElements(By.xpath(".//div[@data-id='0']/a/span[@class='b-nav__item__count']"));
 		}
 	
 	static WebElement inbox_numbers() {
-		return Driver.findElement(By.xpath(".//span[@class='b-nav__item__count']"));
+		return Driver.findElement(By.xpath(".//div[@data-id='0']/a/span[1]"));
 		}
 	
 	static WebElement last_letter_checkbox() {
@@ -120,11 +120,12 @@ public class PageObjects {
 		}
 	
 	static List<WebElement> sent_numbers_list() {
-		return Driver.findElements(By.xpath(".//span[@class='b-nav__item__count']"));
+//		return Driver.findElements(By.xpath(".//span[@class='b-nav__item__count']"));
+		return Driver.findElements(By.xpath(".//div[@data-id='500000']/a/span[@class='b-nav__item__count']"));
 		}
 	
 	static WebElement sent_numbers() {
-		return Driver.findElement(By.xpath(".//span[@class='b-nav__item__count']"));
+		return Driver.findElement(By.xpath(".//div[@data-id='500000']/a/span[@class='b-nav__item__count']"));
 		}
 // __________________ SENT PAGE __________________
 
