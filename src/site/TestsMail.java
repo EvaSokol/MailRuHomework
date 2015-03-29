@@ -20,7 +20,7 @@ public class TestsMail {
 	}
 	
 	@Test
-	public void testLoginLogout() {
+	public void test_LoginLogout() {
 		
 		Actions.login();
 		
@@ -31,9 +31,11 @@ public class TestsMail {
 	}
 	
 	@Test
-	public void testSendMail() {
+	public void test_SendMail() {
 		
 		Actions.login();
+		
+		Actions.markAllUnread();
 		
 		int letters_before = Actions.get_inbox_letters();
 		
@@ -47,9 +49,11 @@ public class TestsMail {
 	}
 	
 	@Test
-	public void testDeleteLastLetter() {
+	public void test_DeleteLastLetter() {
 			
 		Actions.login();
+		
+		Actions.markAllUnread();
 
 		if (Actions.get_inbox_letters() == 0) {
 			Actions.sendMail();
@@ -58,9 +62,7 @@ public class TestsMail {
 
 		int letters_before = Actions.get_inbox_letters();
 
-		PageObjects.last_letter().click();
-
-		PageObjects.delete_button().click();
+		Actions.delete_last_letter();
 
 		int letters_after = Actions.get_inbox_letters();
 
@@ -68,19 +70,40 @@ public class TestsMail {
 	}
 	
 	@Test
-	public void cleanSentFolder() {
+	public void test_CleanSentFolder() {
 		
 		Actions.login();
-		System.out.println("1");
+
 		PageObjects.sent_folder().click();
-		System.out.println("2");
-		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		
-		System.out.println("3");
-		PageObjects.check_all_page().sendKeys(Keys.DELETE);
-//		PageObjects.delete_button().click();
-		System.out.println("4");
+		if (Actions.get_inbox_letters() == 0) {
+			Actions.sendMail();
+			Actions.goInbox();
+		}
+		
+		Actions.markAllUnread();
+		
+		Actions.delete_last_letter();
+
 		assert(Actions.get_inbox_letters() == 0);
+	}
+	
+	@Test
+	public void test_CleanTrashFolder() {
+		
+		Actions.login();
+
+		Actions.goTrash();
+		
+		if (Actions.true_if_trash_empty()) {
+			Actions.delete_last_letter();
+			}
+		
+		Actions.goTrash();
+		
+		Actions.cleanTrash();
+				
+		assert(Actions.true_if_trash_empty());
 	}
 	
 	@After

@@ -1,0 +1,18 @@
+(Tests_of_tests_mail_TW)
+
+test_LoginLogout				+
+test_SendMail				+
+test_DeleteLastLetter (letter is present)		+
+test_DeleteLastLetter (letter is absent)		-
+test_CleanSentFolder (letters are present) 	-
+test_CleanSentFolder (letters are absent) 	-
+test_CleanTrashFolder (letters are present) 	+
+test_CleanTrashFolder (letters are absent) 	-
+
+TestMail
+Run as following:
+1. test_CleanTrashFolder (passed)
+2. test_LoginLogout (passed)
+3. test_SendMail (passed)
+4. test_CleanSentFolder (passed)
+5. test_DeleteLastLetter (failed)

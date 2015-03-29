@@ -55,7 +55,7 @@ public class PageObjects {
 		return Driver.findElement(By.xpath(".//span[@class='b-nav__item__count']"));
 		}
 	
-	static WebElement last_letter() {
+	static WebElement last_letter_checkbox() {
 		return Driver.findElements(By.xpath(".//div[@class='js-item-cbx b-datalist__item__cbx']")).get(0);
 		}
 	
@@ -127,7 +127,26 @@ public class PageObjects {
 		return Driver.findElement(By.xpath(".//span[@class='b-nav__item__count']"));
 		}
 // __________________ SENT PAGE __________________
+
+// ****************** TRASH Folder PAGE ******************
+	static WebElement clean_trash_folder_button() {
+		return Driver.findElement(By.xpath(".//button[@data-name='clearFolder']"));
+		}
 	
+	static WebElement clean_trash_confirmation_button() {
+		return Driver.findElement(By.xpath(".//span[@class='btn__text']"));
+		}
+	
+	static WebElement clean_trash_confirmation() {
+		return Driver.findElement(By.xpath(".//div[@class='is-clearFolderConfirm_in']/form/div[2]/button[2]"));
+		}
+	
+	static List<WebElement> trash_empty() {
+		return Driver.findElements(By.xpath(".//div[@class='b-datalist__empty__icon b-datalist__empty__icon_trash']"));
+		}
+		
+// __________________ TRASH Folder PAGE __________________	
+
 // ****************** NEW PAGE ******************
 // __________________ NEW PAGE __________________
 	

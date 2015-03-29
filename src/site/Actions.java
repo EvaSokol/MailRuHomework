@@ -1,5 +1,6 @@
 package site;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -8,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Actions {
 	static WebDriver Driver = DriverManager.getDriver();
+	static WebDriverWait _wait = new WebDriverWait(Driver, 3);
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -16,14 +18,7 @@ public class Actions {
 		
 		login();
 		
-//		int letters_before = get_inbox_letters();
-//		
-//		PageObjects.last_letter().click();
-//		
-//		PageObjects.delete_button().click();
-//		
-//		int letters_after = get_inbox_letters();
-//		
+		markAllUnread();
 	
 		PageObjects.exit().click();
 
@@ -59,7 +54,6 @@ public class Actions {
 	}
 	
 	static void wait_by_login_field() {
-		WebDriverWait _wait = new WebDriverWait(Driver, 3);
 		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.login_field())); 
 		}
 	
@@ -84,5 +78,44 @@ public class Actions {
 	
 	static void goInbox() {
 		PageObjects.inbox().click();
+		}
+	
+	static void goTrash() {
+		PageObjects.trash_folder().click();
+		}
+	
+	static void markAllUnread() {
+		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		PageObjects.check_all_page().sendKeys("u");
+		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		}
+	
+	static void deleteAll() {
+		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		PageObjects.check_all_page().sendKeys(Keys.DELETE);
+		}
+
+	static void delete_last_letter() {
+		goInbox();
+		if (get_inbox_letters() == 0) {
+			sendMail();
+			goInbox();
+		}
+		PageObjects.last_letter_checkbox().click();
+		PageObjects.delete_button().click();
+		}
+	
+	static boolean true_if_trash_empty() {
+		if (PageObjects.trash_empty().size() == 0)
+			return false;
+		else 
+			return true;
+	}
+	
+	static void cleanTrash() {
+		PageObjects.clean_trash_folder_button().click();
+//		PageObjects.clean_trash_confirmation_button().submit();
+//		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.clean_trash_confirmation_button())); 
+		PageObjects.clean_trash_confirmation().click();
 	}
 }
