@@ -8,10 +8,10 @@ Executes as follows:
 5 DeleteLastLetter
 
 trash  	sent  	inbox   	LoginLogout	SendMail	DeleteLastLetter	CleanSentFolder	CleanTrashFolder
-0	0	0   1   1 1   1 	1
+0	0	0   	  1		1	1		1	 	1
 0	0	1	  1		1	1		1		1
 0	1	0	  1		1	1		1		0/1
-0	1	1	  1		1	0/1	1		0
+0	1	1	  1		1	0/1		1		0
 1	0	0	  1		1	1		1		1
 1	0	1	  1		1	1		1		1
 1	1	0	  1		1	1		1		1
