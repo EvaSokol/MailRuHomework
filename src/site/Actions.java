@@ -29,36 +29,75 @@ public class Actions {
 	public static void login() {
 		
 		DriverManager.open();
+		login_data("eva.mask", "@mail.ru", "karavan1");
+	}
+	
+	public static void login_data(String name, String domain, String password) {
 		
-		PageObjects.login_field().sendKeys("eva.mask");
-		PageObjects.domain_field().sendKeys("@mail.ru");
-		PageObjects.password_field().sendKeys("karavan1");
+		DriverManager.open();
 		
-		if (PageObjects.remember_checkbox().isSelected()) {
-			PageObjects.remember_checkbox().click();
+		PageObjects.login_field().sendKeys(name);
+		PageObjects.domain_field().sendKeys(domain);
+		PageObjects.password_field().sendKeys(password);
+		
+		if (PageObjects.remember_checkbox_login_page().isSelected()) {
+			PageObjects.remember_checkbox_login_page().click();
 		}
 		
 		PageObjects.login_button().click();
 	}
 	
-	public static void sendMail() {
+	public static void login_authorization() {
+		
+		PageObjects.login_field().sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		PageObjects.login_field().sendKeys("eva.mask");
+		PageObjects.domain_field().sendKeys("@mail.ru");
+		PageObjects.password_field().sendKeys("karavan1");
+		
+		if (PageObjects.remember_checkbox_auth_form().isSelected()) {
+			PageObjects.remember_checkbox_auth_form().click();
+		}
+		
+		PageObjects.login_authorization_button().click();
+	}
+	
+	public static void logout() {
+		Actions.wait_by_exit();
+		PageObjects.exit().click();
+	}
+	
+	public static boolean Title_check() {
+		if (Driver.getTitle() == "Mail.Ru: почта, поиск в интернете, новости, игры")
+			return true;
+		return false;
+	}
+	
+ 	public static void sendMail() {
+		send_Mail_with_requisites("eva.mask@mail.ru", "TestLetter");
+	}
+
+	public static void send_Mail_with_requisites(String address, String subject) {
 		
 		PageObjects.write_letter().click();
-		PageObjects.input_address().sendKeys("eva.mask@mail.ru");
+		PageObjects.input_address().sendKeys(address);
 		PageObjects.input_address().click();
 		PageObjects.input_subject().click();
-		PageObjects.input_subject().sendKeys("TestLetter");
+		PageObjects.input_subject().sendKeys(subject);
 		PageObjects.open_smiles().click();
 		PageObjects.dance_smile().click();
 		PageObjects.send_button().click();
 	}
+	
+	static void wait_by_wrong_login() {
+		_wait.until(ExpectedConditions.visibilityOf(PageObjects.bad_login_or_password())); 
+		}
 	
 	static void wait_by_login_field() {
 		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.login_field())); 
 		}
 	
 	static void wait_by_exit() {
-		WebDriverWait _wait = new WebDriverWait(Driver, 5);
+//		WebDriverWait _wait = new WebDriverWait(Driver, 5);
 		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.exit())); 
 		}
 	

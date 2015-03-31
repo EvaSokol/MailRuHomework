@@ -13,25 +13,48 @@ public class PageObjects {
 // ****************** Mail.ru MAIN page ******************
 	
 	static WebElement login_field() {
-		return Driver.findElement(By.xpath(".//input[@id='mailbox__login']"));
+//		return Driver.findElement(By.xpath(".//input[@id='mailbox__login']"));
+		return Driver.findElement(By.xpath(".//input[@name='Login']"));
 		}
 	
 	static WebElement password_field() {
-		return Driver.findElement(By.xpath(".//input[@id='mailbox__password']"));
+//		return Driver.findElement(By.xpath(".//input[@id='mailbox__password']"));
+		return Driver.findElement(By.xpath(".//input[@name='Password']"));
 		}
 	
 	static WebElement domain_field() {
-		return Driver.findElement(By.xpath(".//select[@id='mailbox__login__domain']"));
+//		return Driver.findElement(By.xpath(".//select[@id='mailbox__login__domain']"));
+		return Driver.findElement(By.xpath(".//select[@name='Domain']"));
 		}
 	
 	static WebElement login_button() {
 		return Driver.findElement(By.xpath(".//input[@id='mailbox__auth__button']"));
 		}
 	
-	static WebElement remember_checkbox() {
+	static WebElement remember_checkbox_login_page() {
 		return Driver.findElement(By.xpath(".//input[@id='mailbox__auth__remember__checkbox']"));
 		}
-// __________________ Mail.ru MAIN page __________________
+	
+	static WebElement title() {
+		return Driver.findElement(By.xpath(".//input[@id='mailbox__auth__remember__checkbox']"));
+		}
+	
+	// __________________ Mail.ru MAIN page __________________
+	
+	// ****************** AUTHORIZATION form ******************
+	
+	static WebElement remember_checkbox_auth_form() {
+		return Driver.findElement(By.xpath(".//input[@class='login-form__remeber__checkbox']"));
+		}
+	
+	static WebElement bad_login_or_password() {
+		return Driver.findElement(By.xpath(".//div[@class='login-page__external_error login-page__external__text_indent js-login-page__external__info']"));
+		}
+	
+	static WebElement login_authorization_button() {
+		return Driver.findElement(By.xpath(".//button[@class='btn btn_main js-login-page__external__submit']"));
+		}
+// __________________ AUTHORIZATION form __________________
 	
 // ****************** INBOX ******************
 	

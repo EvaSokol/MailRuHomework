@@ -23,8 +23,6 @@ public class TestsMail {
 		
 		Actions.login();
 		
-		Actions.wait_by_exit();
-		
 		assert(PageObjects.inbox().isDisplayed());
 
 	}
@@ -107,9 +105,8 @@ public class TestsMail {
 	}
 	
 	@After
-	public void Logout() {
-		Actions.wait_by_exit();
-		PageObjects.exit().click();
+ 	public void Logout() {
+		Actions.logout();
 	}
 	
 	@AfterClass
@@ -118,3 +115,5 @@ public class TestsMail {
 	}
 
 }
+
+
