@@ -13,17 +13,14 @@ public class PageObjects {
 // ****************** Mail.ru MAIN page ******************
 	
 	static WebElement login_field() {
-//		return Driver.findElement(By.xpath(".//input[@id='mailbox__login']"));
 		return Driver.findElement(By.xpath(".//input[@name='Login']"));
 		}
 	
 	static WebElement password_field() {
-//		return Driver.findElement(By.xpath(".//input[@id='mailbox__password']"));
 		return Driver.findElement(By.xpath(".//input[@name='Password']"));
 		}
 	
 	static WebElement domain_field() {
-//		return Driver.findElement(By.xpath(".//select[@id='mailbox__login__domain']"));
 		return Driver.findElement(By.xpath(".//select[@name='Domain']"));
 		}
 	
@@ -67,7 +64,7 @@ public class PageObjects {
 		}
 	
 	static WebElement write_letter() {
-		return Driver.findElement(By.xpath(".//span[@class='b-toolbar__btn__text b-toolbar__btn__text_pad']"));
+		return Driver.findElement(By.xpath(".//a[@data-name='compose']"));
 		}
 	
 	static List<WebElement> inbox_numbers_list() {
@@ -143,7 +140,6 @@ public class PageObjects {
 		}
 	
 	static List<WebElement> sent_numbers_list() {
-//		return Driver.findElements(By.xpath(".//span[@class='b-nav__item__count']"));
 		return Driver.findElements(By.xpath(".//div[@data-id='500000']/a/span[@class='b-nav__item__count']"));
 		}
 	

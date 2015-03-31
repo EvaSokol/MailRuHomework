@@ -10,17 +10,55 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Actions {
 	static WebDriver Driver = DriverManager.getDriver();
 	static WebDriverWait _wait = new WebDriverWait(Driver, 3);
+	
+// ****************** COMMON ******************
+	public static void logout() {
+		Actions.wait_by_exit();
+		PageObjects.exit().click();
+	}
+	
+	static void wait_by_exit() {
+		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.exit())); 
+		}
+	
+	static void wait_by_delete() {
+		WebDriverWait _wait = new WebDriverWait(Driver, 3);
+		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.delete_button())); 
+		}
+	
+	static void goInbox() {
+		PageObjects.inbox().click();
+		}
+	
+	static void goTrash() {
+		PageObjects.trash_folder().click();
+		}
+	
+	static void markAllUnread() {
+		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		PageObjects.check_all_page().sendKeys("u");
+		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		}
+	
+	static void delete_All() {
+		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
+		PageObjects.check_all_page().sendKeys(Keys.DELETE);
+		}
+	
+	static void go_Sent_folder() {
+		PageObjects.sent_folder().click();	
+	}
+// __________________ COMMON __________________
+	
+// ****************** MAIN page ******************
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
 		DriverManager.open();
 		
 		login();
 		
-		markAllUnread();
-	
-		PageObjects.exit().click();
+		sendMail();
 
 		DriverManager.finish();
 		
@@ -28,14 +66,13 @@ public class Actions {
 	
 	public static void login() {
 		
-		DriverManager.open();
+//		DriverManager.open();
+		wait_by_login_field();
 		login_data("eva.mask", "@mail.ru", "karavan1");
 	}
 	
 	public static void login_data(String name, String domain, String password) {
-		
 		DriverManager.open();
-		
 		PageObjects.login_field().sendKeys(name);
 		PageObjects.domain_field().sendKeys(domain);
 		PageObjects.password_field().sendKeys(password);
@@ -61,31 +98,10 @@ public class Actions {
 		PageObjects.login_authorization_button().click();
 	}
 	
-	public static void logout() {
-		Actions.wait_by_exit();
-		PageObjects.exit().click();
-	}
-	
-	public static boolean Title_check() {
+	public static boolean main_Title_check() {
 		if (Driver.getTitle() == "Mail.Ru: почта, поиск в интернете, новости, игры")
 			return true;
 		return false;
-	}
-	
- 	public static void sendMail() {
-		send_Mail_with_requisites("eva.mask@mail.ru", "TestLetter");
-	}
-
-	public static void send_Mail_with_requisites(String address, String subject) {
-		
-		PageObjects.write_letter().click();
-		PageObjects.input_address().sendKeys(address);
-		PageObjects.input_address().click();
-		PageObjects.input_subject().click();
-		PageObjects.input_subject().sendKeys(subject);
-		PageObjects.open_smiles().click();
-		PageObjects.dance_smile().click();
-		PageObjects.send_button().click();
 	}
 	
 	static void wait_by_wrong_login() {
@@ -95,16 +111,16 @@ public class Actions {
 	static void wait_by_login_field() {
 		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.login_field())); 
 		}
+// __________________ MAIN page __________________
 	
-	static void wait_by_exit() {
-//		WebDriverWait _wait = new WebDriverWait(Driver, 5);
-		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.exit())); 
-		}
-	
-	static void wait_by_delete() {
-		WebDriverWait _wait = new WebDriverWait(Driver, 3);
-		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.delete_button())); 
-		}
+// ****************** INBOX PAGE ******************
+	public static boolean inbox_Title_check() {
+		String titleString = Driver.getTitle();
+		CharSequence s = "Входящие";
+		if (titleString.contains(s))
+			return true;
+		return false;
+	}
 	
 	static int get_inbox_letters() {
 		if (PageObjects.inbox_numbers_list().size() == 0) {
@@ -117,25 +133,6 @@ public class Actions {
 			}
 		}
 	
-	static void goInbox() {
-		PageObjects.inbox().click();
-		}
-	
-	static void goTrash() {
-		PageObjects.trash_folder().click();
-		}
-	
-	static void markAllUnread() {
-		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
-		PageObjects.check_all_page().sendKeys("u");
-		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
-		}
-	
-	static void delete_All() {
-		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
-		PageObjects.check_all_page().sendKeys(Keys.DELETE);
-		}
-
 	static void delete_last_letter() {
 		goInbox();
 		if (get_inbox_letters() == 0) {
@@ -145,7 +142,68 @@ public class Actions {
 		PageObjects.last_letter_checkbox().click();
 		PageObjects.delete_button().click();
 		}
-		
+// __________________ INBOX PAGE __________________
+	
+// ****************** SEND MAIL ******************
+	public static boolean sendMail_Title_check() {
+		String titleString = Driver.getTitle();
+		CharSequence s = "Новое письмо";
+		if (titleString.contains(s))
+			return true;
+		return false;
+	}
+	
+ 	public static void sendMail() {
+		send_Mail_with_requisites("eva.mask@mail.ru", "TestLetter");
+	}
+
+	public static void send_Mail_with_requisites(String address, String subject) {
+		PageObjects.write_letter().click();
+		assert sendMail_Title_check();
+		wait_by_input_address();
+		PageObjects.input_address().sendKeys(address);
+		PageObjects.input_address().click();
+		PageObjects.input_subject().click();
+		PageObjects.input_subject().sendKeys(subject);
+		PageObjects.open_smiles().click();
+		PageObjects.dance_smile().click();
+		PageObjects.send_button().click();
+	}
+	
+	static void wait_by_input_address() {
+		_wait.until(ExpectedConditions.visibilityOf(PageObjects.input_address())); 
+		}
+	
+// __________________ SEND MAIL __________________
+
+// ****************** SENT folder ******************
+	public static boolean sentFolder_Title_check() {
+		String titleString = Driver.getTitle();
+		CharSequence s = "Отправленные";
+		if (titleString.contains(s))
+			return true;
+		return false;
+	}
+	
+	public static int get_sent_letters() {
+		if (PageObjects.sent_numbers_list().size() == 0) 
+			return 0;	
+		else {
+			WebElement inbox = PageObjects.sent_numbers();
+			return Integer.parseInt(inbox.getText());
+		}
+	}
+// __________________ SENT folder __________________	
+	
+// ****************** TRASH ******************
+	public static boolean trash_Title_check() {
+		String titleString = Driver.getTitle();
+		CharSequence s = "Корзина";
+		if (titleString.contains(s))
+			return true;
+		return false;
+	}
+
 	static boolean true_if_trash_empty() {
 		if (PageObjects.trash_empty().size() == 0)
 			return false;
@@ -157,20 +215,7 @@ public class Actions {
 		PageObjects.clean_trash_folder_button().click();
 		PageObjects.clean_trash_confirmation().click();
 	}
-
-	static void go_Sent_folder() {
-		PageObjects.sent_folder().click();
-		
-	}
-
-	public static int get_sent_letters() {
-		if (PageObjects.sent_numbers_list().size() == 0) {
-			return 0;
-		}
-			
-		else {
-			WebElement inbox = PageObjects.sent_numbers();
-			return Integer.parseInt(inbox.getText());
-			}
-	}
+// __________________ TRASH __________________
+	
 }
+

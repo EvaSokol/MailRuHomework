@@ -1,6 +1,5 @@
 package site;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,12 +17,26 @@ public class TestsMail {
 		Actions.wait_by_login_field();
 	}
 	
+//	@After
+// 	public void Logout() {
+//		Actions.logout();
+//	}
+	
+	@AfterClass
+	public static void StopBrowser() {
+		DriverManager.finish();
+	}
+	
 	@Test
 	public void test_LoginLogout() {
 		
 		Actions.login();
 		
-		assert(PageObjects.inbox().isDisplayed());
+		assert(Actions.inbox_Title_check());
+		
+		Actions.logout();
+		
+		assert(Actions.main_Title_check());
 
 	}
 	
@@ -38,17 +51,23 @@ public class TestsMail {
 		
 		Actions.sendMail();
 		
-		assert(PageObjects.check_go_to_inbox().isDisplayed());
+		assert(Actions.inbox_Title_check());
 		
 		int letters_after = Actions.get_inbox_letters();
 		
 		assert(letters_before + 1 == letters_after);
+		
+		Actions.logout();
+		
+		assert(Actions.main_Title_check());
 	}
 	
 	@Test
 	public void test_DeleteLastLetter() {
-			
+		
 		Actions.login();
+		
+		Actions.inbox_Title_check();
 		
 		Actions.markAllUnread();
 
@@ -64,6 +83,10 @@ public class TestsMail {
 		int letters_after = Actions.get_inbox_letters();
 
 		assert(letters_before - 1 == letters_after);
+		
+		Actions.logout();
+		
+		assert(Actions.main_Title_check());
 	}
 	
 	@Test
@@ -72,6 +95,9 @@ public class TestsMail {
 		Actions.login();
 
 		Actions.go_Sent_folder();
+		
+		assert(Actions.sentFolder_Title_check());
+		
 		Actions.markAllUnread();
 		
 		if (Actions.get_sent_letters() == 0) {
@@ -84,12 +110,18 @@ public class TestsMail {
 		Actions.delete_All();
 		
 		assert(Actions.get_sent_letters() == 0);
+		
+		Actions.logout();
+		
+		assert(Actions.main_Title_check());
 	}
 	
 	@Test
 	public void test_CleanTrashFolder() {
 		
 		Actions.login();
+		
+		assert(Actions.inbox_Title_check());
 
 		Actions.goTrash();
 		
@@ -99,19 +131,33 @@ public class TestsMail {
 		
 		Actions.goTrash();
 		
+		assert(Actions.trash_Title_check());
+		
 		Actions.cleanTrash();
 				
 		assert(Actions.true_if_trash_empty());
-	}
-	
-	@After
- 	public void Logout() {
+		
 		Actions.logout();
+		
+		assert(Actions.main_Title_check());
 	}
 	
-	@AfterClass
-	public static void StopBrowser() {
-		DriverManager.finish();
+	@Test
+	public void test_wrong_password() {
+		Actions.login_data("eva.mask", "@mail.ru", "123");
+		
+		Actions.wait_by_wrong_login();
+		
+		assert (PageObjects.bad_login_or_password().isDisplayed());
+		
+		Actions.login_authorization();
+		
+		assert(Actions.inbox_Title_check());
+		
+		Actions.logout();
+		
+		assert(Actions.main_Title_check());
+
 	}
 
 }
