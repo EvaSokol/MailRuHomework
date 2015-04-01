@@ -13,14 +13,9 @@ public class TestsMail {
 	}
 	
 	@Before
-	public void CheckLoginPage() {
-		Actions.wait_by_login_field();
+	public void Check_Logged_Out() {
+		Actions.logout_forse();
 	}
-	
-//	@After
-// 	public void Logout() {
-//		Actions.logout();
-//	}
 	
 	@AfterClass
 	public static void StopBrowser() {
@@ -143,7 +138,7 @@ public class TestsMail {
 	}
 	
 	@Test
-	public void test_wrong_password() {
+	public void test_WrongPassword() {
 		Actions.login_data("eva.mask", "@mail.ru", "123");
 		
 		Actions.wait_by_wrong_login();

@@ -65,14 +65,13 @@ public class Actions {
 		}
 	
 	public static void login() {
-		
-		DriverManager.open();
-		wait_by_login_field();
+
 		login_data("eva.mask", "@mail.ru", "karavan1");
 	}
 	
 	public static void login_data(String name, String domain, String password) {
 		DriverManager.open();
+		wait_by_login_field();
 		PageObjects.login_field().sendKeys(name);
 		PageObjects.domain_field().sendKeys(domain);
 		PageObjects.password_field().sendKeys(password);
@@ -111,6 +110,14 @@ public class Actions {
 	static void wait_by_login_field() {
 		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.login_field())); 
 		}
+	
+	static void logout_forse() {
+		if (PageObjects.main_authorized().isDisplayed()) {
+			PageObjects.main_authorized().click();
+		}
+		else 
+			return;
+	}
 // __________________ MAIN page __________________
 	
 // ****************** INBOX PAGE ******************

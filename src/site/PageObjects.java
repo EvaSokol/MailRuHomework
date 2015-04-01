@@ -36,6 +36,13 @@ public class PageObjects {
 		return Driver.findElement(By.xpath(".//input[@id='mailbox__auth__remember__checkbox']"));
 		}
 	
+//	static WebElement main_authorized() {
+//		return Driver.findElement(By.xpath(".//div[@id='PH_authView']"));
+//		}
+	static WebElement main_authorized() {
+		return Driver.findElement(By.xpath(".//a[@id='PH_logoutLink']"));
+		}
+	
 	// __________________ Mail.ru MAIN page __________________
 	
 	// ****************** AUTHORIZATION form ******************
