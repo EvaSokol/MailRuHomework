@@ -66,7 +66,7 @@ public class Actions {
 	
 	public static void login() {
 		
-//		DriverManager.open();
+		DriverManager.open();
 		wait_by_login_field();
 		login_data("eva.mask", "@mail.ru", "karavan1");
 	}

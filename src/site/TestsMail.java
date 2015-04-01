@@ -48,7 +48,7 @@ public class TestsMail {
 		Actions.markAllUnread();
 		
 		int letters_before = Actions.get_inbox_letters();
-		
+
 		Actions.sendMail();
 		
 		assert(Actions.inbox_Title_check());
@@ -152,11 +152,11 @@ public class TestsMail {
 		
 		Actions.login_authorization();
 		
-		assert(Actions.inbox_Title_check());
+//		assert(Actions.inbox_Title_check());
 		
 		Actions.logout();
 		
-		assert(Actions.main_Title_check());
+//		assert(Actions.main_Title_check());
 
 	}
 
