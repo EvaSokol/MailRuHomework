@@ -4,7 +4,7 @@
         <Classes>
             <Class name="TestNGMail" />
             <methods>
-                <include name= test_LoginLogout" />
+                <include name= "test_LoginLogout" />
                 <include name= "test_SendMail" />
             </methods
         </Classes>

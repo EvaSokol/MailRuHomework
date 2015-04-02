@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.prefs.Preferences;
+
 
 public class Actions {
 	static WebDriver Driver = DriverManager.getDriver();
@@ -13,12 +15,12 @@ public class Actions {
 	
 // ****************** COMMON ******************
 	public static void logout() {
-		Actions.wait_by_exit();
+//		Actions.wait_by_exit();
 		PageObjects.exit().click();
 	}
 	
 	static void wait_by_exit() {
-		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.exit())); 
+		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.exit()));
 		}
 	
 	static void wait_by_delete() {
@@ -49,7 +51,7 @@ public class Actions {
 		PageObjects.sent_folder().click();	
 	}
 // __________________ COMMON __________________
-	
+
 // ****************** MAIN page ******************
 
 	public static void main(String[] args) {
@@ -98,7 +100,10 @@ public class Actions {
 	}
 	
 	public static boolean main_Title_check() {
-		if (Driver.getTitle() == "Mail.Ru: почта, поиск в интернете, новости, игры")
+//		if (Driver.getTitle() == "Mail.Ru: почта, поиск в интернете, новости, игры")
+//			return true;
+//		return false;
+		if (PageObjects.main_authorized().isDisplayed() || PageObjects.main_nonAuthorized().isDisplayed())
 			return true;
 		return false;
 	}
@@ -112,8 +117,8 @@ public class Actions {
 		}
 	
 	static void logout_forse() {
-		if (PageObjects.main_authorized().isDisplayed()) {
-			PageObjects.main_authorized().click();
+		if (PageObjects.main_logout().isDisplayed()) {
+			PageObjects.main_logout().click();
 		}
 		else 
 			return;
@@ -121,10 +126,8 @@ public class Actions {
 // __________________ MAIN page __________________
 	
 // ****************** INBOX PAGE ******************
-	public static boolean inbox_Title_check() {
-		String titleString = Driver.getTitle();
-		CharSequence s = "Входящие";
-		if (titleString.contains(s))
+	public static boolean inboxCheck() {
+		if (PageObjects.inbox().isDisplayed())
 			return true;
 		return false;
 	}
@@ -166,7 +169,7 @@ public class Actions {
 
 	public static void send_Mail_with_requisites(String address, String subject) {
 		PageObjects.write_letter().click();
-		assert sendMail_Title_check();
+//		assert sendMail_Title_check();
 		wait_by_input_address();
 		PageObjects.input_address().sendKeys(address);
 		PageObjects.input_address().click();
@@ -175,6 +178,7 @@ public class Actions {
 		PageObjects.open_smiles().click();
 		PageObjects.dance_smile().click();
 		PageObjects.send_button().click();
+		PageObjects.inbox().click();
 	}
 	
 	static void wait_by_input_address() {

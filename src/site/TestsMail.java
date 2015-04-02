@@ -27,7 +27,7 @@ public class TestsMail {
 		
 		Actions.login();
 		
-		assert(Actions.inbox_Title_check());
+		assert(Actions.inboxCheck());
 		
 		Actions.logout();
 		
@@ -46,7 +46,7 @@ public class TestsMail {
 
 		Actions.sendMail();
 		
-		assert(Actions.inbox_Title_check());
+		assert(Actions.inboxCheck());
 		
 		int letters_after = Actions.get_inbox_letters();
 		
@@ -62,7 +62,7 @@ public class TestsMail {
 		
 		Actions.login();
 		
-		Actions.inbox_Title_check();
+		Actions.inboxCheck();
 		
 		Actions.markAllUnread();
 
@@ -116,7 +116,7 @@ public class TestsMail {
 		
 		Actions.login();
 		
-		assert(Actions.inbox_Title_check());
+		assert(Actions.inboxCheck());
 
 		Actions.goTrash();
 		
@@ -147,7 +147,7 @@ public class TestsMail {
 		
 		Actions.login_authorization();
 		
-		assert(Actions.inbox_Title_check());
+		assert(Actions.inboxCheck());
 		
 		Actions.logout();
 		

@@ -5,10 +5,13 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class PageObjects {
 
 	static WebDriver Driver = DriverManager.getDriver();
+	static WebDriverWait _wait = new WebDriverWait(Driver, 3);
 	
 // ****************** Mail.ru MAIN page ******************
 	
@@ -36,10 +39,15 @@ public class PageObjects {
 		return Driver.findElement(By.xpath(".//input[@id='mailbox__auth__remember__checkbox']"));
 		}
 	
-//	static WebElement main_authorized() {
-//		return Driver.findElement(By.xpath(".//div[@id='PH_authView']"));
-//		}
 	static WebElement main_authorized() {
+		return Driver.findElement(By.xpath(".//div[@id='PH_authView']"));
+		}
+
+	static WebElement main_nonAuthorized() {
+		return Driver.findElement(By.xpath(".//div[@id='PH_noAuthView']"));
+	}
+
+	static WebElement main_logout() {
 		return Driver.findElement(By.xpath(".//a[@id='PH_logoutLink']"));
 		}
 	
@@ -63,7 +71,8 @@ public class PageObjects {
 // ****************** INBOX ******************
 	
 	static WebElement exit() {
-		return Driver.findElement(By.xpath(".//a[@id='PH_logoutLink']"));
+		return _wait.until(ExpectedConditions.elementToBeClickable(By.xpath(".//a[@id='PH_logoutLink']")));
+//		return Driver.findElement(By.xpath(".//a[@id='PH_logoutLink']"));
 		}
 	
 	static WebElement inbox() {
