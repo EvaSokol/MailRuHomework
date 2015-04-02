@@ -1,0 +1,12 @@
+!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd";>
+<suite name="s1">
+    <test name="t1">
+        <Classes>
+            <Class name="TestNGMail" />
+            <methods>
+                <include name= test_LoginLogout" />
+                <include name= "test_SendMail" />
+            </methods
+        </Classes>
+    </test>
+</suite>
