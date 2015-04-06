@@ -1,4 +1,4 @@
-package site;
+package test;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
