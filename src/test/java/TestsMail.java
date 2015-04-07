@@ -1,21 +1,27 @@
-package test;
+package test.java;
 
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.AfterSuite;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.AfterClass;
 
-public class TestNG_Mail {
-  
-//	@Test(dataProvider = "dp")
-//  public void f(Integer n, String s) {
-//  }
-  
+public class TestsMail {
+
+	@BeforeClass
+	public static void StartBrowser() {
+		DriverManager.open();
+	}
+	
+	@Before
+	public void Check_Logged_Out() {
+		Actions.logout_forse();
+	}
+	
+	@AfterClass
+	public static void StopBrowser() {
+		DriverManager.finish();
+	}
+	
 	@Test
 	public void test_LoginLogout() {
 		
@@ -40,13 +46,15 @@ public class TestNG_Mail {
 
 		Actions.sendMail();
 		
+		assert(Actions.inboxCheck());
+		
 		int letters_after = Actions.get_inbox_letters();
 		
 		assert(letters_before + 1 == letters_after);
 		
 		Actions.logout();
 		
-//		assert(Actions.main_Title_check());
+		assert(Actions.main_Title_check());
 	}
 	
 	@Test
@@ -73,7 +81,7 @@ public class TestNG_Mail {
 		
 		Actions.logout();
 		
-//		assert(Actions.main_Title_check());
+		assert(Actions.main_Title_check());
 	}
 	
 	@Test
@@ -82,7 +90,9 @@ public class TestNG_Mail {
 		Actions.login();
 
 		Actions.go_Sent_folder();
-
+		
+		assert(Actions.sentFolder_Title_check());
+		
 		Actions.markAllUnread();
 		
 		if (Actions.get_sent_letters() == 0) {
@@ -97,13 +107,16 @@ public class TestNG_Mail {
 		assert(Actions.get_sent_letters() == 0);
 		
 		Actions.logout();
-
+		
+		assert(Actions.main_Title_check());
 	}
 	
 	@Test
 	public void test_CleanTrashFolder() {
 		
 		Actions.login();
+		
+		assert(Actions.inboxCheck());
 
 		Actions.goTrash();
 		
@@ -112,13 +125,16 @@ public class TestNG_Mail {
 			}
 		
 		Actions.goTrash();
-
+		
+		assert(Actions.trash_Title_check());
+		
 		Actions.cleanTrash();
 				
 		assert(Actions.true_if_trash_empty());
 		
 		Actions.logout();
 		
+		assert(Actions.main_Title_check());
 	}
 	
 	@Test
@@ -131,53 +147,14 @@ public class TestNG_Mail {
 		
 		Actions.login_authorization();
 		
+		assert(Actions.inboxCheck());
+		
 		Actions.logout();
+		
+		assert(Actions.main_Title_check());
 
 	}
-  
-  @BeforeMethod
-  public void beforeMethod() {
-	  Actions.logout_forse();
-  }
-
-  @AfterMethod
-  public void afterMethod() {
-  }
-
-//  @DataProvider
-//  public Object[][] dp() {
-//    return new Object[][] {
-//      new Object[] { 1, "a" },
-//      new Object[] { 2, "b" },
-//    };
-//  }
-
-	@BeforeClass
-	public static void StartBrowser() {
-		DriverManager.open();
-	}
-
-  @AfterClass
-  public static void StopBrowser() {
-		DriverManager.finish();
-  	}
-
-  @BeforeTest
-  public void Check_Logged_Out() {
-		Actions.logout_forse();
-	}
-
-  @AfterTest
-  public void afterTest() {
-  }
-
-  @BeforeSuite
-  public void beforeSuite() {
-	  DriverManager.open();
-  }
-
-  @AfterSuite
-  public void afterSuite() {
-  }
 
 }
+
+
