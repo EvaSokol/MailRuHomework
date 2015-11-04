@@ -28,26 +28,26 @@ public class Actions {
 		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.delete_button())); 
 		}
 	
-	static void goInbox() {
+	public static void goInbox() {
 		PageObjects.inbox().click();
 		}
 	
-	static void goTrash() {
+	public static void goTrash() {
 		PageObjects.trash_folder().click();
 		}
 	
-	static void markAllUnread() {
+	public static void markAllUnread() {
 		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		PageObjects.check_all_page().sendKeys("u");
 		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		}
 	
-	static void delete_All() {
+	public static void delete_All() {
 		PageObjects.check_all_page().sendKeys(Keys.chord(Keys.CONTROL, "a"));
 		PageObjects.check_all_page().sendKeys(Keys.DELETE);
 		}
 	
-	static void go_Sent_folder() {
+	public static void go_Sent_folder() {
 		PageObjects.sent_folder().click();	
 	}
 // __________________ COMMON __________________
@@ -100,7 +100,7 @@ public class Actions {
 	}
 	
 	public static boolean main_Title_check() {
-//		if (Driver.getTitle() == "Mail.Ru: почта, поиск в интернете, новости, игры")
+//		if (Driver.getTitle() == "Mail.Ru: пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅ")
 //			return true;
 //		return false;
 		if (PageObjects.main_authorized().isDisplayed() || PageObjects.main_nonAuthorized().isDisplayed())
@@ -108,7 +108,7 @@ public class Actions {
 		return false;
 	}
 	
-	static void wait_by_wrong_login() {
+	public static void wait_by_wrong_login() {
 		_wait.until(ExpectedConditions.visibilityOf(PageObjects.bad_login_or_password())); 
 		}
 	
@@ -116,7 +116,7 @@ public class Actions {
 		_wait.until(ExpectedConditions.elementToBeClickable(PageObjects.login_field())); 
 		}
 	
-	static void logout_forse() {
+	public static void logout_forse() {
 		if (PageObjects.main_logout().isDisplayed()) {
 			PageObjects.main_logout().click();
 		}
@@ -132,7 +132,7 @@ public class Actions {
 		return false;
 	}
 	
-	static int get_inbox_letters() {
+	public static int get_inbox_letters() {
 		if (PageObjects.inbox_numbers_list().size() == 0) {
 			return 0;
 		}
@@ -143,7 +143,7 @@ public class Actions {
 			}
 		}
 	
-	static void delete_last_letter() {
+	public static void delete_last_letter() {
 		goInbox();
 		if (get_inbox_letters() == 0) {
 			sendMail();
@@ -157,7 +157,7 @@ public class Actions {
 // ****************** SEND MAIL ******************
 	public static boolean sendMail_Title_check() {
 		String titleString = Driver.getTitle();
-		CharSequence s = "Новое письмо";
+		CharSequence s = "пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ";
 		if (titleString.contains(s))
 			return true;
 		return false;
@@ -190,7 +190,7 @@ public class Actions {
 // ****************** SENT folder ******************
 	public static boolean sentFolder_Title_check() {
 		String titleString = Driver.getTitle();
-		CharSequence s = "Отправленные";
+		CharSequence s = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 		if (titleString.contains(s))
 			return true;
 		return false;
@@ -209,20 +209,20 @@ public class Actions {
 // ****************** TRASH ******************
 	public static boolean trash_Title_check() {
 		String titleString = Driver.getTitle();
-		CharSequence s = "Корзина";
+		CharSequence s = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 		if (titleString.contains(s))
 			return true;
 		return false;
 	}
 
-	static boolean true_if_trash_empty() {
+	public static boolean true_if_trash_empty() {
 		if (PageObjects.trash_empty().size() == 0)
 			return false;
 		else 
 			return true;
 	}
 	
-	static void cleanTrash() {
+	public static void cleanTrash() {
 		PageObjects.clean_trash_folder_button().click();
 		PageObjects.clean_trash_confirmation().click();
 	}

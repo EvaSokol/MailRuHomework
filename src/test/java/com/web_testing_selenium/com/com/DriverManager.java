@@ -15,7 +15,7 @@ public class DriverManager {
 		Driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}
 	
-	static void open() {
+	public static void open() {
 		
 		Driver.get(BaseUrl);
 	}
@@ -28,7 +28,7 @@ public class DriverManager {
 		return Driver;
 	}
 	
-	static void finish() {
+	public static void finish() {
 		DriverManager.Driver.quit();
 	}
 

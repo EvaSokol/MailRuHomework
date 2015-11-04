@@ -1,5 +1,8 @@
 package test.java;
 
+import com.web_testing_selenium.com.com.Actions;
+import com.web_testing_selenium.com.com.DriverManager;
+import com.web_testing_selenium.com.com.PageObjects;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;

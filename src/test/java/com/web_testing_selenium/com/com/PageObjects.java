@@ -59,7 +59,7 @@ public class PageObjects {
 		return Driver.findElement(By.xpath(".//input[@class='login-form__remeber__checkbox']"));
 		}
 	
-	static WebElement bad_login_or_password() {
+	public static WebElement bad_login_or_password() {
 		return Driver.findElement(By.xpath(".//div[@class='login-page__external_error login-page__external__text_indent js-login-page__external__info']"));
 		}
 	
